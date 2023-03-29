@@ -1,0 +1,261 @@
+<html>
+    <head>
+        <title>Smart Sender &lt;&gt; ZohoCRM</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <style type="text/css">
+            @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Ubuntu', sans-serif;
+                text-align: center;
+            }
+            .hidden {
+                display: none !important;
+            }
+            .app {
+                width: 100%;
+                height: 100vh;
+                padding: 30px;
+            }
+            .app .board{
+                display: grid;
+                justify-items: center;
+                align-items: center;
+                grid-gap: 20px;
+            }
+            .information .title {
+                font-size: 26px;
+            }
+            .auth-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 30px;
+                margin: 10px;
+                border-radius: 15px;
+                background: #20a9e9;
+                color: #ffffff;
+            }
+            a {
+                text-decoration: none;
+            }
+            .console-link {
+                background: #20a9e9;
+                padding: 10px;
+                display: block;
+                border-radius: 15px;
+                width: 200px;
+                color: #ffffff;
+            }
+            .application.form {
+                padding: 20px;
+            }
+            form#app-form {
+                display: grid;
+                align-items: center;
+                justify-items: center;
+                grid-gap: 10px;
+            }
+            .input.redirecturl {
+                position: relative;
+            }
+            .copy-redirecturl {
+                position: absolute;
+                top: 7px;
+                right: 10px;
+                cursor: pointer;
+            }
+            input {
+                width: 400px;
+                height: 30px;
+                border: 2px solid green;
+                border-radius: 15px;
+                padding: 3px 10px;
+            }
+            input:not([type="submit" i]) {
+                text-align: start;
+            }
+            .step1 {
+                display: grid;
+                justify-items: center;
+            }
+            .label {
+                text-align: start;
+                padding: 0 10px;
+            }
+            .elem.submit input {
+                background: green;
+                color: #ffffff;
+                cursor: pointer;
+                font-size: 20px;
+            }
+            .auth-btn .logo {
+                content: '';
+                width: 90px;
+                height: 30px;
+                margin-left: 7px;
+                background-repeat: no-repeat;
+                background-position: -305px 0;
+                background-size: auto 50px;
+                background-image: url(//www.zohowebstatic.com/sites/default/files/zh-sprite-2x-new.png);
+            }
+            span.company {
+                display: inline-block;
+                padding: 5px;
+                background: #e6dede;
+                border-radius: 10px;
+            }
+            .logout {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                cursor: pointer;
+                background: #e6dede;
+                display: flex;
+                align-items: center;
+                padding: 5px;
+                border-radius: 10px;
+            }
+            .previous {
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                cursor: pointer;
+                background: #e6dede;
+                display: flex;
+                align-items: center;
+                padding: 5px;
+                border-radius: 10px;
+            }
+            .icon {
+                font-size: 20px;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="app">
+            <div class="board">
+                <div class="information">
+                    <div class="title">Авторизация с помощью Zoho</div>
+                    <div class="state"></div>
+                </div>
+                <div class="auth step1 hidden">
+                    <div class="title">Для продолжения перейдите на страницу 👇<br>
+                        и создайте веб-приложение:</div><br>
+                        <a class="console-link" href="https://api-console.zoho.eu" target="_blank">Консоль разработчика</a>
+                    <div class="application form">
+                        <form id="app-form">
+                            <div class="elem">
+                                <div class="label">Redirect URL:</div>
+                                <div class="input redirecturl">
+                                    <input id="redirecturl-input" readonly>
+                                    <div class="copy-redirecturl">
+                                        <ion-icon name="copy-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="elem">
+                                <div class="label">Application ID:</div>
+                                <div class="input appId">
+                                    <input id="appid-input" required>
+                                </div>
+                            </div>
+                            <div class="elem">
+                                <div class="label">Application Secret:</div>
+                                <div class="input appsecret">
+                                    <input id="appsecret-input" required>
+                                </div>
+                            </div>
+                            <div class="elem submit">
+                                <input type="submit" value="Сохранить">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="auth step2 hidden">
+                    <div class="title">Для продолжения нажмите кнопку ниже:</div>
+                    <a id="auth-link" href="#">
+                        <div class="auth-btn">
+                            <div class="text">Авторизироваться через</div>
+                            <div class="logo"></div>
+                        </div>
+                    </a>
+                    <div class="previous"><div class="icon"><ion-icon name="chevron-back-outline"></ion-icon></div> Назад</div>
+                </div>
+                <div class="auth success hidden">
+                    <div class="title">Успішно авторизовано. Компанія: <span class="company"></span></div>
+                    <div class="logout"><div class="icon"><ion-icon name="exit-outline"></ion-icon></div> Інший аккаунт</div>
+                </div>
+            </div>
+        </div>
+        <div class="scripts hidden">
+            <script>
+                function sendRequest (url, type = "GET", param = {}, func = null, atr = {}) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open(type, url);
+                    xhr.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            let result = JSON.parse(this.responseText);
+                            console.log('API запрос', result);
+                            if (func) {
+                                func (result, atr);
+                            }
+                        }
+                    };
+                    xhr.send(JSON.stringify(param));
+                }
+                function createApp() {
+                    var sendApp = {
+                        mode: "create application",
+                        id: document.getElementById('appid-input').value,
+                        secret: document.getElementById('appsecret-input').value
+                    };
+                    sendRequest('connect.php', 'POST', sendApp, function(result) {
+                        if (result.state) {
+                            location.reload();
+                        }
+                    });
+                }
+                sendRequest('connect.php?mode=info', 'GET', [], function(result) {
+                    if (result.state) {
+                        document.getElementsByClassName('company')[0].innerHTML = result.company.company_name;
+                        document.getElementsByClassName('success')[0].classList.remove('hidden');
+                    } else {
+                        if (result["connecting"] == "step1") {
+                            document.getElementById('redirecturl-input').value = result.redirectUrl;
+                            document.getElementById('app-form').addEventListener('submit', function() {
+                                event.preventDefault();
+                                createApp();
+                            });
+                            document.getElementsByClassName('copy-redirecturl')[0].addEventListener('click', function() {
+                                var redirectUrl = document.getElementById('redirecturl-input');
+                                redirectUrl.select();
+                                if (document.execCommand('copy')) {
+                                    console.log("Copied")
+                                }
+                            });
+                            document.getElementsByClassName("step1")[0].classList.remove('hidden');
+                        } else if (result["connecting"] == "step2") {
+                            document.getElementById('auth-link').href = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL,ZohoCRM.org.ALL,ZohoCRM.settings.ALL,ZohoCRM.users.ALL,ZohoCRM.bulk.ALL,ZohoCRM.notifications.ALL&client_id=${result.appId}&response_type=code&access_type=offline&redirect_uri=${result.redirectUrl}`;
+                            document.getElementsByClassName("step2")[0].classList.remove('hidden');
+                        }
+                    }
+                });
+                document.getElementsByClassName('previous')[0].addEventListener('click', function() {
+                    document.getElementsByClassName("step1")[0].classList.remove('hidden');
+                    document.getElementsByClassName("step2")[0].classList.add('hidden');
+                });
+                document.getElementsByClassName('logout')[0].addEventListener('click', function() {
+                    document.getElementsByClassName("step2")[0].classList.remove('hidden');
+                    document.getElementsByClassName("success")[0].classList.add('hidden');
+                });
+            </script>
+        </div>
+    </body>
+</html>
