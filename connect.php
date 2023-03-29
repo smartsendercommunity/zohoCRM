@@ -71,6 +71,7 @@ if ($_GET["mode"] == "info") {
     ], "GET"), true);
     if ($companys["org"] != NULL) {
         $result["company"] = $companys["org"][0];
+        $result["redirectUrl"] = $url."oauth.php";
     } else {
         $result["state"] = false;
         $result["connecting"] = "step2";

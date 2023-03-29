@@ -226,6 +226,7 @@
                     if (result.state) {
                         document.getElementsByClassName('company')[0].innerHTML = result.company.company_name;
                         document.getElementsByClassName('success')[0].classList.remove('hidden');
+                        document.getElementById('redirecturl-input').value = result.redirectUrl;
                     } else {
                         if (result["connecting"] == "step1") {
                             document.getElementById('redirecturl-input').value = result.redirectUrl;
@@ -242,6 +243,7 @@
                             });
                             document.getElementsByClassName("step1")[0].classList.remove('hidden');
                         } else if (result["connecting"] == "step2") {
+                            document.getElementById('redirecturl-input').value = result.redirectUrl;
                             document.getElementById('auth-link').href = `https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.modules.ALL,ZohoCRM.org.ALL,ZohoCRM.settings.ALL,ZohoCRM.users.ALL,ZohoCRM.bulk.ALL,ZohoCRM.notifications.ALL&client_id=${result.appId}&response_type=code&access_type=offline&redirect_uri=${result.redirectUrl}`;
                             document.getElementsByClassName("step2")[0].classList.remove('hidden');
                         }
