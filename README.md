@@ -5,7 +5,7 @@
 Для подключения к zohoCRM откройте в Вашем браузере публичный адрес к папке с файлами (или файлу index.html) на Вашем хостинге и следуйте инструкциям
 
 
-Шаблон с примерами запросов https://messenger.smartsender.com/t/ylu5dVP52w5PiIB1Ts7WvDn3HTBhwPDuhT0gdc1b
+Шаблон с примерами запросов https://smartsender.com/experts/20/templates/162
 
 
 Список названий полей для использования в запросах можно узнать в настройках zoho <br>
