@@ -34,4 +34,4 @@ if ($rAuth["expires_in"] > 1000) {
 $log["auth"]["result"] = $rAuth;
 
 send_forward(json_encode($log), "https://log.mufiksoft.com/zohocrm");
-header('Location: '.$url);
+header('Location: '.$url.'index.html');
