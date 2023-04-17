@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', '1');
+error_reporting(E_ERROR);
+
 $url = "https://".$_SERVER["HTTP_HOST"].dirname($_SERVER["PHP_SELF"]);
 $url = explode("?", $url);
 $url = $url[0];
